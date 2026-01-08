@@ -21,8 +21,6 @@ This project demonstrates how to manage global state using slices, actions, redu
 - JavaScript (ES6+)
 - CSS
 
-##########################################################################################################################################################################################################################
-
 ## 🧠 Redux Toolkit Concepts Covered
 
 - `configureStore`
@@ -42,7 +40,7 @@ This project demonstrates how to manage global state using slices, actions, redu
 3. Reducer updates the global state
 4. Components re-render automatically using `useSelector`
 
-################# ▶️ Getting Started
+## ▶️ Getting Started
 
 1. Clone the repository
 git clone https://github.com/your-username/redux-toolkit-todo-app.git
@@ -53,8 +51,7 @@ npm install
 3. Run the project
 npm run dev
 
-############################################################################################################################
-📌 Purpose of This Project
+## 📌 Purpose of This Project
 
 This project is intended for:
 
@@ -64,7 +61,7 @@ Understanding global state management in React
 
 Practicing clean project architecture
 
-✨ Future Improvements
+## ✨ Future Improvements
 
 Edit todo functionality
 
@@ -74,7 +71,7 @@ Dark mode
 
 Better UI animations
 
-🧑‍💻 Author
+## 🧑‍💻 Author
 
 Aadil Sohail
 
