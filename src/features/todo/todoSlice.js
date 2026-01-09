@@ -1,30 +1,48 @@
-import { createSlice, nanoid } from "@reduxjs/toolkit";
+import { createSlice, createAsyncThunk, nanoid } from "@reduxjs/toolkit";
 
-//Slice is Basically a reducer + actions
+// Async Thunk
+export const addTodoAsync = createAsyncThunk(
+    "todo/addTodoAsync",
+    async (text) => {
+        await new Promise((resolve) => setTimeout(resolve, 1000));
+        return {
+            id: nanoid(),
+            text
+        };
+    }
+);
+
+// Initial State
 const initialState = {
-    todos: [{ id: nanoid(), text: "Hello There" }]
+    todos: [],
+    status: "idle" // idle | loading | success | error
+};
 
-}
-
+// Slice
 export const todoSlice = createSlice({
-    name: 'todo',
+    name: "todo",
     initialState,
     reducers: {
-        addTodo: (state, action) => {
-            const todo = {
-                id: nanoid(),
-                text: action.payload
-            }
-            state.todos.push(todo)
-        },
-
-
         removeTodo: (state, action) => {
-            state.todos = state.todos.filter((todo) => todo.id !== action.payload)
-        },
+            state.todos = state.todos.filter(
+                (todo) => todo.id !== action.payload
+            );
+        }
+    },
+    extraReducers: (builder) => {
+        builder
+            .addCase(addTodoAsync.pending, (state) => {
+                state.status = "loading";
+            })
+            .addCase(addTodoAsync.fulfilled, (state, action) => {
+                state.status = "success";
+                state.todos.push(action.payload);
+            })
+            .addCase(addTodoAsync.rejected, (state) => {
+                state.status = "error";
+            });
     }
-})
+});
 
-export const { addTodo, removeTodo } = todoSlice.actions
-
-export default todoSlice.reducer
+export const { removeTodo } = todoSlice.actions;
+export default todoSlice.reducer;
